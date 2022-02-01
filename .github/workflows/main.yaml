@@ -2,7 +2,7 @@ name: CI devops 2022 CPE
 on:
   #to begin you want to launch this job in main and develop
   push:
-    branches: #TODO
+    branches: ['main', 'develop']
   pull_request:
   
 jobs:
@@ -14,8 +14,11 @@ jobs:
     
       #do the same with another action (actions/setup-java@v2) that enable to setup jdk 11
       - name: Set up JDK 11
-        #TODO
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
   
       #finally build your app with the latest command
       - name: Build and test with Maven
-        run: #TODO
+        run: mvn clean verify --file ./TP2/TP1_ToPipeLine/simple-api -DskipTests

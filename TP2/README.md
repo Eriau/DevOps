@@ -6,5 +6,4 @@ C'est une librairie qui permet de créer automatiquement des containers docker p
 
 ## 2-2 : Document your Github Actions configurations.
 
-J'ai commencé par ajouter mes infos au fichier .gitconfig.
-Si l'on souhaite aussi push le fichier .gitconfig voir https://stackoverflow.com/questions/8505335/hiding-github-token-in-gitconfig sur comment faire cela.
+J'ai commencé par ajouter mes credentials pour Docker hub dans Github Action.
