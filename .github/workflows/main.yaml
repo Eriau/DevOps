@@ -55,7 +55,6 @@ jobs:
 
   build-and-push-simple-api:
     needs: test-backend
-    # run only when code is compiling and tests are passing
     runs-on: ubuntu-latest
     env:
       working-directory: ./TP2/TP1_ToPipeLine/simple-api
