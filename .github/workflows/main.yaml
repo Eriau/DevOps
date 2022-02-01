@@ -27,7 +27,8 @@ jobs:
         run: mvn -B verify sonar:sonar -Dsonar.projectKey=dc599d03-0619-4425-bd4c-8753a5a8c7c7 -Dsonar.organization=3cc2c7a5-d688-481a-9f31-945ae33a35cc -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} --file ./TP2/TP1_ToPipeLine/simple-api/pom.xml
       
       #finally build your app with the latest command
-      - name: Build and test with Maven
+      - name: Build and test with Maven and cache dependencies
+        run: mvn dependency:go-offline
         run: mvn clean verify --file ./TP2/TP1_ToPipeLine/simple-api
         
 
