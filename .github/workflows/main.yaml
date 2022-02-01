@@ -29,9 +29,10 @@ jobs:
       #finally build your app with the latest command
       - name: Build and test with Maven
         run: mvn clean verify --file ./TP2/TP1_ToPipeLine/simple-api
-    only:
-      change:
-        - ./TP2/TP1_ToPipeLine/simple-api/*
+    on:
+      push:
+        paths:
+          - ./TP2/TP1_ToPipeLine/simple-api/*'
 
   
   # define job to build and publish docker image
