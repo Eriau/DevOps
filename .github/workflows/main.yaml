@@ -36,7 +36,6 @@ jobs:
 
   build-and-push-databases:
     needs: test-backend
-    # run only when code is compiling and tests are passing
     runs-on: ubuntu-latest
     env:
       working-directory: ./TP2/TP1_ToPipeLine/database
