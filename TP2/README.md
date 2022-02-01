@@ -208,6 +208,132 @@ jobs:
 
 ```
 
-Troisième amélioration : Ne pas run test backend si aucun fichier dans le dosier /simple-api n'a changé.
+Troisième amélioration : 
+  - Ne pas run test backend si aucun fichier dans le dosier /simple-api n'a changé, p
+  - test-backend must be launch on develop and master branch and build-and-push-docker-image on master only.
+  - The job that pushes the docker api image must be launched only if test-backend is passed
 
-TODO
+Ci-dessous les workflows qui permettent de faire cela :
+
+```yaml
+name: Build & Push Backend
+on:
+  workflow_run:
+    workflows: ["Test Backend"]
+    types:
+      - completed
+    branches: ['main']
+  pull_request:
+  
+jobs:
+  build-and-push-simple-api:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./TP2/TP1_ToPipeLine/simple-api
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Login to DockerHub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{secrets.DOCKERHUB_PASSWORD }}
+ 
+      - name: Build image and push backend
+        uses: docker/build-push-action@v2
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./TP2/TP1_ToPipeLine/simple-api
+          # Note: tags has to be all lower-case
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops_tp01_api:1.1
+          push: ${{ github.ref == 'refs/heads/main' }}
+```
+
+
+```yaml
+name: Build & Push HTPP and DB
+on:
+  #to begin you want to launch this job in main and develop
+  push:
+    branches: ['main']
+  pull_request:
+
+jobs:
+  build-and-push-databases:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./TP2/TP1_ToPipeLine/database
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Login to DockerHub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{secrets.DOCKERHUB_PASSWORD }}
+      
+      - name: Build image and push database
+        uses: docker/build-push-action@v2
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./TP2/TP1_ToPipeLine/database
+          # Note: tags has to be all lower-case
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops_tp01_db:1.1
+          push: ${{ github.ref == 'refs/heads/main' }}
+ 
+  build-and-push-http:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./TP2/TP1_ToPipeLine/http
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Login to DockerHub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{secrets.DOCKERHUB_PASSWORD }}
+      
+      - name: Build image and push httpd
+        uses: docker/build-push-action@v2
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./TP2/TP1_ToPipeLine/http
+          # Note: tags has to be all lower-case
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops_httpd:1.1
+          push: ${{ github.ref == 'refs/heads/main' }}
+```
+
+```yaml
+name: Test Backend
+on:
+  #to begin you want to launch this job in main and develop
+  push:
+    branches: ['main', 'develop']
+    path: 
+      - './TP2/TP1_ToPipeLine/simple-api/*'
+  pull_request:
+  
+jobs:
+  test-backend:
+    runs-on: ubuntu-18.04
+    steps:
+      #checkout your github code using actions/checkout@v2.3.3
+      - uses: actions/checkout@v2.3.3
+    
+      #do the same with another action (actions/setup-java@v2) setups jdk 11
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: 'maven'
+  
+      #analyse with sonar
+      - name: Analyse with sonar
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify sonar:sonar -Dsonar.projectKey=dc599d03-0619-4425-bd4c-8753a5a8c7c7 -Dsonar.organization=3cc2c7a5-d688-481a-9f31-945ae33a35cc -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} --file ./TP2/TP1_ToPipeLine/simple-api/pom.xml
+      
+      #finally build your app with the latest command
+      - name: Build and test with Maven
+        run: mvn clean verify --file ./TP2/TP1_ToPipeLine/simple-api
+        
+
+```
+
