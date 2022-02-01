@@ -29,31 +29,20 @@ jobs:
       #finally build your app with the latest command
       - name: Build and test with Maven
         run: mvn clean verify --file ./TP2/TP1_ToPipeLine/simple-api
-    with:
-      files: ./TP2/TP1_ToPipeLine/simple-api/*
         
-  # define job to build and publish docker image
-  build-and-push-docker-image:
+
+  build-and-push-databases:
     needs: test-backend
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-latest
-
-    # steps to perform in job
+    env:
+      working-directory: ./TP2/TP1_ToPipeLine/database
     steps:
-      - name: Login to DockerHub
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-      
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Build image and push backend
-        uses: docker/build-push-action@v2
-        with:
-          # relative path to the place where source code with Dockerfile is located
-          context: ./TP2/TP1_ToPipeLine/simple-api
-          # Note: tags has to be all lower-case
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops_tp01_api:1.1
-          push: ${{ github.ref == 'refs/heads/main' }}
+      
+      - name: Login to DockerHub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{secrets.DOCKERHUB_PASSWORD }}
       
       - name: Build image and push database
         uses: docker/build-push-action@v2
@@ -64,6 +53,40 @@ jobs:
           tags: ${{secrets.DOCKERHUB_USERNAME}}/devops_tp01_db:1.1
           push: ${{ github.ref == 'refs/heads/main' }}
 
+  build-and-push-simple-api:
+    needs: test-backend
+    # run only when code is compiling and tests are passing
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./TP2/TP1_ToPipeLine/simple-api
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Login to DockerHub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{secrets.DOCKERHUB_PASSWORD }}
+ 
+       - name: Build image and push backend
+        uses: docker/build-push-action@v2
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./TP2/TP1_ToPipeLine/simple-api
+          # Note: tags has to be all lower-case
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops_tp01_api:1.1
+          push: ${{ github.ref == 'refs/heads/main' }}
+ 
+  build-and-push-http:
+    needs: test-backend
+    # run only when code is compiling and tests are passing
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./TP2/TP1_ToPipeLine/http
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Login to DockerHub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{secrets.DOCKERHUB_PASSWORD }}
       
       - name: Build image and push httpd
         uses: docker/build-push-action@v2
