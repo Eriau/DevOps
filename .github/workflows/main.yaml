@@ -7,6 +7,10 @@ on:
   
 jobs:
   test-backend:
+    on:
+      push:
+        paths:
+          - ./TP2/TP1_ToPipeLine/simple-api/*'
     runs-on: ubuntu-18.04
     steps:
       #checkout your github code using actions/checkout@v2.3.3
@@ -29,11 +33,6 @@ jobs:
       #finally build your app with the latest command
       - name: Build and test with Maven
         run: mvn clean verify --file ./TP2/TP1_ToPipeLine/simple-api
-    on:
-      push:
-        paths:
-          - ./TP2/TP1_ToPipeLine/simple-api/*'
-
   
   # define job to build and publish docker image
   build-and-push-docker-image:
