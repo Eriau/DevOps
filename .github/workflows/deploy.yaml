@@ -34,5 +34,5 @@ jobs:
       - name: run exporters playbook
         run: |
           pwd
-          ls -all
+          ls .ssh/id_rsa
           ansible-playbook -i ./TP3/inventories/setup.yaml ./TP3/playbook.yaml
