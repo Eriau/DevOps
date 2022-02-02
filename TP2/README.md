@@ -228,22 +228,21 @@ on:
 jobs:
   build-and-push-simple-api:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./TP2/TP1_ToPipeLine/simple-api
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} # Si le workflow "Test Backend" a été un succés
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       
       - name: Login to DockerHub
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{secrets.DOCKERHUB_PASSWORD }}
- 
+
       - name: Build image and push backend
         uses: docker/build-push-action@v2
         with:
           # relative path to the place where source code with Dockerfile is located
           context: ./TP2/TP1_ToPipeLine/simple-api
           # Note: tags has to be all lower-case
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops_tp01_api:1.1
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops_tp01_api:1.2
           push: ${{ github.ref == 'refs/heads/main' }}
 ```
 
