@@ -1,9 +1,9 @@
-name: Build & Push front
-on:
-  #to begin you want to launch this job in main and develop
-  push:
-    #branches: ['main']
-  pull_request:
+# name: Build & Push front
+# on:
+#   #to begin you want to launch this job in main and develop
+#   push:
+#     branches: ['main']
+#   pull_request:
 
 jobs:
   build-and-push-front:

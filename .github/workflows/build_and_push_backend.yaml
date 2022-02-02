@@ -1,11 +1,11 @@
-name: Build & Push Backend
-on:
-  workflow_run:
-    workflows: ["Test Backend"]
-    types:
-      - completed
-    #branches: ['main']
-  pull_request:
+# name: Build & Push Backend
+# on:
+#   workflow_run:
+#     workflows: ["Test Backend"]
+#     types:
+#       - completed
+#     branches: ['main']
+#   pull_request:
   
 jobs:
   build-and-push-simple-api:
