@@ -1,7 +1,7 @@
 ---
 # tasks file for roles/launch-app
 
-- name: Remove container app if already exists
+- name: Remove container app if it already exists
   docker_container:
     name: api
     state: absent

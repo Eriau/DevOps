@@ -1,7 +1,7 @@
 ---
 # tasks file for roles/database
 
-- name: Remove container db if already exists
+- name: Remove container db if it already exists
   docker_container:
     name: postgresdb
     state: absent
