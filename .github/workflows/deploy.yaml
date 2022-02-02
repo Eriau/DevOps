@@ -1,11 +1,18 @@
+# name: Deploy application
+# on:
+#   workflow_run:
+#     workflows: ["Build & Push Backend"]
+#     types:
+#       - completed
+#     branches: ['main']
+#   pull_request:
+
 name: Deploy application
 on:
-  workflow_run:
-    workflows: ["Build & Push Backend"]
-    types:
-      - completed
+  push:
     branches: ['main']
   pull_request:
+
 
 jobs:
   deploy:
@@ -23,4 +30,5 @@ jobs:
           chmod 600 .ssh/id_rsa
       - name: run exporters playbook
         run: |
+          echo pwd
           ansible-playbook -i TP3/inventories/setup.yaml TP3/playbook.yaml
