@@ -27,12 +27,9 @@ jobs:
           SERVER_SSH_KEY: ${{ secrets.SERVER_RSA }}
         run: |
           echo "$ANSIBLE_VAULT_PASSWORD" > .ansible-vault-password
-          mkdir .ssh
-          echo "$SERVER_SSH_KEY" > .ssh/id_rsa
-          chmod 600 .ssh/id_rsa
-        working-directory: ./
+          mkdir ./.ssh
+          echo "$SERVER_SSH_KEY" > ./.ssh/id_rsa
+          chmod 600 ./.ssh/id_rsa
       - name: run exporters playbook
         run: |
-          pwd
-          ansible-playbook -i inventories/setup.yaml playbook.yaml
-        working-directory: ./TP3
+          ansible-playbook -i ./TP3/inventories/setup.yaml ./TP3/playbook.yaml
