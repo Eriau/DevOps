@@ -17,6 +17,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./
     #if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Set ansible config secrets
@@ -28,7 +30,9 @@ jobs:
           mkdir .ssh
           echo "$SERVER_SSH_KEY" > .ssh/id_rsa
           chmod 600 .ssh/id_rsa
+        working-directory: ./
       - name: run exporters playbook
         run: |
           pwd
-          ansible-playbook -i TP3/inventories/setup.yaml TP3/playbook.yaml
+          ansible-playbook -i inventories/setup.yaml playbook.yaml
+        working-directory: ./TP3
