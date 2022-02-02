@@ -8,19 +8,19 @@ on:
   pull_request:
 
 jobs:
-  on-succes:
-    deploy:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Set ansible config secrets
-          env:
-            ANSIBLE_VAULT_PASSWORD: ${{ secrets.VAULT_PASSWORD }}
-            SERVER_SSH_KEY: ${{ secrets.SERVER_RSA }}
-          run: |
-            echo "$ANSIBLE_VAULT_PASSWORD" > .ansible-vault-password
-            mkdir .ssh
-            echo "$SERVER_SSH_KEY" > .ssh/id_rsa
-            chmod 600 .ssh/id_rsa
-        - name: run exporters playbook
-          run: |
-            ansible-playbook -i TP3/inventories/setup.yaml TP3/playbook.yaml
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Set ansible config secrets
+        env:
+          ANSIBLE_VAULT_PASSWORD: ${{ secrets.VAULT_PASSWORD }}
+          SERVER_SSH_KEY: ${{ secrets.SERVER_RSA }}
+        run: |
+          echo "$ANSIBLE_VAULT_PASSWORD" > .ansible-vault-password
+          mkdir .ssh
+          echo "$SERVER_SSH_KEY" > .ssh/id_rsa
+          chmod 600 .ssh/id_rsa
+      - name: run exporters playbook
+        run: |
+          ansible-playbook -i TP3/inventories/setup.yaml TP3/playbook.yaml
