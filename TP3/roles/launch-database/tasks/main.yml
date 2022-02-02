@@ -9,7 +9,7 @@
 - name: Run DB
   docker_container:
     name: postgresdb
-    image: eriau/devops_tp01_db:1.2
+    image: eriau/devops_tp01_db:1.3
     networks:
       - name: network_tp03
     volumes:

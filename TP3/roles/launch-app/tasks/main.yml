@@ -3,12 +3,24 @@
 
 - name: Remove container app if it already exists
   docker_container:
-    name: api
+    name: api_1
+    state: absent
+
+- name: Remove container app if it already exists
+  docker_container:
+    name: api_2
     state: absent
 
 - name: Run App
   docker_container:
-    name: api
+    name: api_1
+    image: eriau/devops_tp01_api:1.2
+    networks:
+      - name: network_tp03
+
+- name: Run App
+  docker_container:
+    name: api_2
     image: eriau/devops_tp01_api:1.2
     networks:
       - name: network_tp03

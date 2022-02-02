@@ -1,13 +1,22 @@
 version: '3.7'
 services:
-  tp01_api:
+  tp01_api_01:
     build:
       ./simple-api
     networks:
       - network_tp01
     depends_on:
       - tp01_db
-    container_name: api
+    container_name: api_1
+
+  tp01_api_02:
+    build:
+      ./simple-api
+    networks:
+      - network_tp01
+    depends_on:
+      - tp01_db
+    container_name: api_2
 
   tp01_db:
     build:
@@ -26,7 +35,8 @@ services:
     networks:
       - network_tp01
     depends_on:
-      - tp01_api
+      - tp01_api_01
+      - tp01_api_02
   
   front:
     build:
@@ -34,7 +44,8 @@ services:
     networks:
       - network_tp01
     depends_on:
-      - tp01_api
+      - tp01_api_01
+      - tp01_api_02
 
 networks:
   network_tp01:
