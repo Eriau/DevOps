@@ -8,8 +8,6 @@ on:
 jobs:
   build-and-push-front:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./TP2/TP1_ToPipeLine/devops-front
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
