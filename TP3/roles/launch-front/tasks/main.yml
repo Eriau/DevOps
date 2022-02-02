@@ -9,6 +9,6 @@
 - name: Run front
   docker_container:
     name: front
-    image: eriau/devops_front:1.0
+    image: eriau/devops_front:1.1
     networks:
       - name: network_tp03

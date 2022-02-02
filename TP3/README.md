@@ -224,7 +224,7 @@ Puis on modifie le **docker-compose.yaml** afin de tester localement :
 
 On rajoute la partie ci-dessus dans les services.
 
-Il faut aussi modifier la variable d'environnement présente dans le fichier *.env.production* pour que ça cherche bien sur le bon url avec le bon port : **VUE_APP_API_URL=localhost:80/api**
+Il faut aussi modifier la variable d'environnement présente dans le fichier *.env.production* pour que ça cherche bien sur le bon url avec le bon port : **VUE_APP_API_URL=mathieu.eriau.takima.cloud:80/api**
 
 Une fois cela fait, le front est disponible sur localhost:80.
 
