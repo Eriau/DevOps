@@ -33,4 +33,6 @@ jobs:
           chmod 600 ./.ssh/id_rsa
       - name: run exporters playbook
         run: |
+          pwd
+          ls -all
           ansible-playbook -i ./TP3/inventories/setup.yaml ./TP3/playbook.yaml
