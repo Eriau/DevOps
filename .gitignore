@@ -1,2 +1,24 @@
 .env
 .ssh
+
+TP2/TP1_ToPipeLine/devops-front/.DS_Store
+TP2/TP1_ToPipeLine/devops-front/node_modules
+TP2/TP1_ToPipeLine/devops-front/dist
+
+# local env files
+TP2/TP1_ToPipeLine/devops-front/.env.local
+TP2/TP1_ToPipeLine/devops-front/.env.*.local
+
+# Log files
+TP2/TP1_ToPipeLine/devops-front/npm-debug.log*
+TP2/TP1_ToPipeLine/devops-front/yarn-debug.log*
+TP2/TP1_ToPipeLine/devops-front/yarn-error.log*
+
+# Editor directories and files
+TP2/TP1_ToPipeLine/devops-front/.idea
+TP2/TP1_ToPipeLine/devops-front/.vscode
+TP2/TP1_ToPipeLine/devops-front/*.suo
+TP2/TP1_ToPipeLine/devops-front/*.ntvs*
+TP2/TP1_ToPipeLine/devops-front/*.njsproj
+TP2/TP1_ToPipeLine/devops-front/*.sln
+TP2/TP1_ToPipeLine/devops-front/*.sw?
