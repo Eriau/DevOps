@@ -21,16 +21,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Set ansible config secrets
-        env:
-          ANSIBLE_VAULT_PASSWORD: ${{ secrets.VAULT_PASSWORD }}
-          SERVER_SSH_KEY: ${{ secrets.SERVER_RSA }}
-        run: |
-          echo "$ANSIBLE_VAULT_PASSWORD" > .ansible-vault-password
-          mkdir ./.ssh
-          echo "$SERVER_SSH_KEY" > ./.ssh/id_rsa
-          chmod 600 ./.ssh/id_rsa
-      - name: run exporters playbook
-        run: |
-          ansible-playbook -i ./TP3/inventories/setup.yaml ./TP3/playbook.yaml
+      
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: ./TP3/playbook.yaml
+          key: ${{secrets.SERVER_RSA}}
+          inventory: |
+            all:
+              vars:
+                ansible_user: centos
+                ansible_ssh_private_key_file: ../.ssh/id_rsa
+              children:
+                prod:
+                  hosts: mathieu.eriau.takima.cloud
