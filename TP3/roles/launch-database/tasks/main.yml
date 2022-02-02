@@ -1,0 +1,16 @@
+---
+# tasks file for roles/database
+
+- name: Remove container db if already exists
+  docker_container:
+    name: postgresdb
+    state: absent
+
+- name: Run DB
+  docker_container:
+    name: postgresdb
+    image: eriau/devops_tp01_db:latest
+    networks:
+      - name: network_tp03
+    volumes:
+      - /data

@@ -1,0 +1,14 @@
+---
+# tasks file for roles/launch-app
+
+- name: Remove container app if already exists
+  docker_container:
+    name: api
+    state: absent
+
+- name: Run App
+  docker_container:
+    name: api
+    image: eriau/devops_tp01_api:latest
+    networks:
+      - name: network_tp03

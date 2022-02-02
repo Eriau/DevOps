@@ -305,7 +305,7 @@ on:
   push:
     branches: ['main', 'develop']
     path: 
-      - './TP2/TP1_ToPipeLine/simple-api/*'
+      - './TP2/TP1_ToPipeLine/simple-api/*' # MARCHE PAS A REVOIR
   pull_request:
   
 jobs:
@@ -333,7 +333,6 @@ jobs:
       #finally build your app with the latest command
       - name: Build and test with Maven
         run: mvn clean verify --file ./TP2/TP1_ToPipeLine/simple-api
-        
-
 ```
 
+Au niveau des tags sur les images, il faudrait aller les chercher soit dans le pom.xml pour l'api Java, soit sur les tags de Git, si y a un nouveau tag on le change, sinon on publie en latest.

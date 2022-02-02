@@ -1,0 +1,9 @@
+- hosts: all
+  gather_facts: no # This is data gathered about target nodes, which don't interest us at the moment
+  become: yes # On se met en root
+  roles: # On indique les rôles à utiliser
+    - install-docker
+    - create-network
+    - launch-database
+    - launch-app
+    - launch-proxy

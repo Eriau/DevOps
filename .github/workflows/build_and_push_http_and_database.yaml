@@ -23,7 +23,7 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./TP2/TP1_ToPipeLine/database
           # Note: tags has to be all lower-case
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops_tp01_db:1.1
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops_tp01_db:1.2
           push: ${{ github.ref == 'refs/heads/main' }}
  
   build-and-push-http:
@@ -43,5 +43,5 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./TP2/TP1_ToPipeLine/http
           # Note: tags has to be all lower-case
-          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops_httpd:1.1
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/devops_httpd:1.2
           push: ${{ github.ref == 'refs/heads/main' }}
