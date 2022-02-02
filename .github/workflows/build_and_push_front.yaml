@@ -19,7 +19,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           # relative path to the place where source code with Dockerfile is located
-          context: ./TP2/TP1_ToPipeLine/devops-front
+          context: ./TP2/TP1_ToPipeLine/front
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops_front:1.0
           push: ${{ github.ref == 'refs/heads/main' }}
  

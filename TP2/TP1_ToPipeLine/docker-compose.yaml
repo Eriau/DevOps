@@ -30,7 +30,7 @@ services:
   
   front:
     build:
-      ./devops-front
+      ./front
     networks:
       - network_tp01
     depends_on:
