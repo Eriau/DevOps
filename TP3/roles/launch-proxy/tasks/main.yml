@@ -9,7 +9,7 @@
 - name: Run HTTPD
   docker_container:
     name: http
-    image: eriau/devops_httpd:latest
+    image: eriau/devops_httpd:1.2
     networks:
       - name: network_tp03
     ports:

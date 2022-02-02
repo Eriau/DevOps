@@ -9,6 +9,6 @@
 - name: Run App
   docker_container:
     name: api
-    image: eriau/devops_tp01_api:latest
+    image: eriau/devops_tp01_api:1.2
     networks:
       - name: network_tp03

@@ -22,4 +22,3 @@ jobs:
           context: ./TP2/TP1_ToPipeLine/front
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops_front:1.0
           push: ${{ github.ref == 'refs/heads/main' }}
- 
