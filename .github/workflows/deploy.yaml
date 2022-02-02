@@ -21,6 +21,9 @@ jobs:
       working-directory: ./
     #if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
       - name: Set ansible config secrets
         env:
           ANSIBLE_VAULT_PASSWORD: ${{ secrets.VAULT_PASSWORD }}
