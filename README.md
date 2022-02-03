@@ -8,7 +8,7 @@ https://github.com/Eriau/DevOps/blob/main/TP1/README.md
 
 https://github.com/Eriau/DevOps/blob/main/TP2/README.md
 
-**!!!** : Au niveau des tags sur les images, il faudrait aller les chercher soit dans le pom.xml pour l'api Java, soit sur les tags de Git, si y a un nouveau tag on le change, sinon on publie en latest.
+**!!!** : Au niveau des tags sur les images, il faudrait aller les chercher soit dans le pom.xml pour l'api Java, soit sur les tags de Git, si y a un nouveau tag on le change, sinon on publie en latest. J'ai rajouté comment récupérer la dernière version push sur git et j'ai utilisé un modèle trouvé sur internet pour l'utiliser quand je push sur docker.
 
 ## TP3 : Ansible
 
