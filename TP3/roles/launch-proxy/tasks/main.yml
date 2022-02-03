@@ -1,11 +1,6 @@
 ---
 # tasks file for roles/http
 
-- name: Remove container http if it already exists
-  docker_container:
-    name: http
-    state: absent
-
 - name: Run HTTPD
   docker_container:
     name: http

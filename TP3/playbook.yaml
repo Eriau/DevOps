@@ -3,6 +3,7 @@
   become: yes # On se met en root
   roles: # On indique les rôles à utiliser
     - install-docker
+    - purge-docker
     - create-network
     - launch-database
     - launch-app

@@ -1,11 +1,6 @@
 ---
 # tasks file for roles/launch-front
 
-- name: Remove container front if it already exists
-  docker_container:
-    name: front
-    state: absent
-
 - name: Run front
   docker_container:
     name: front
