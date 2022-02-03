@@ -282,3 +282,40 @@ Pour la récupérer via Ansible :
 ```
 
 Et finalement on test sur le serveur.
+
+## Continuous deployment
+
+J'ai fait un nouveau workflow qui va s'occuper de l'éxecution du playbook ansible présent dans le repo :
+
+```yaml
+name: Deploy application
+on:
+  workflow_run:
+    workflows: ["Build & Push Backend"]
+    types:
+      - completed
+    branches: ['main']
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: ./TP3/playbook.yaml
+          key: ${{secrets.SERVER_RSA}}
+          inventory: |
+            all:
+              vars:
+                ansible_user: centos
+              children:
+                prod:
+                  hosts: mathieu.eriau.takima.cloud
+
+```

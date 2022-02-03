@@ -1,15 +1,10 @@
 ---
 # tasks file for roles/http
 
-- name: Remove container http if it already exists
-  docker_container:
-    name: http
-    state: absent
-
 - name: Run HTTPD
   docker_container:
     name: http
-    image: eriau/devops_httpd:1.2
+    image: eriau/devops_httpd:1.3
     networks:
       - name: network_tp03
     ports:
