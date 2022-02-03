@@ -1,13 +1,11 @@
 name: Build & Push front
 on:
   push:
-    tags:
-      - v*.*.*
+    branches: ['main']
   pull_request:
 
 jobs:
   build-and-push-front:
-    if: github.event.base_ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

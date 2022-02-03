@@ -1,15 +1,11 @@
 name: Test Backend
 on:
   push:
-    tags:
-      - v*.*.*
+    branches: ['main', 'prod']
   pull_request:
 
 jobs:
   test-backend:
-    if: |
-      github.event.base_ref == 'refs/heads/main' ||
-      github.event.base_ref == 'refs/heads/prod'
     runs-on: ubuntu-18.04
     steps:
       #checkout your github code using actions/checkout@v2.3.3

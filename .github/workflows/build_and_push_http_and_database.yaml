@@ -1,13 +1,11 @@
 name: Build & Push HTPP and DB
 on:
   push:
-    tags:
-      - v*.*.*
+    branches: ['main']
   pull_request:
 
 jobs:
   build-and-push-databases:
-    if: github.event.base_ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
       working-directory: ./TP2/TP1_ToPipeLine/database
@@ -33,7 +31,6 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' }}
  
   build-and-push-http:
-    if: github.event.base_ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
       working-directory: ./TP2/TP1_ToPipeLine/http
