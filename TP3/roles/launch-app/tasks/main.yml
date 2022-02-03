@@ -3,14 +3,7 @@
 
 - name: Run App
   docker_container:
-    name: api_1
-    image: eriau/devops_tp01_api:1.2
-    networks:
-      - name: network_tp03
-
-- name: Run App
-  docker_container:
-    name: api_2
-    image: eriau/devops_tp01_api:1.2
+    name: api
+    image: eriau/devops_tp01_api:latest
     networks:
       - name: network_tp03

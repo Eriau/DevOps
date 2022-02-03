@@ -15,6 +15,7 @@ https://github.com/Eriau/DevOps/blob/main/TP2/README.md
 https://github.com/Eriau/DevOps/blob/main/TP3/README.md
 
 **!!!** : Lorsque l'on fetch les images, si la version n'a pas changée il n y aura aucun pull. Donc soit supprimer les images et les containers à chaque fetch, soit faire un versionning bon.
+**!!!** : Plutôt utiliser 'workflow_call' au lieu de 'workflow_run' c'est plus logique.
 
 ## TP_Extras
 
