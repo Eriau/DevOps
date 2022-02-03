@@ -1,5 +1,4 @@
 ---
-# tasks file for roles/launch-app
 
 - name: Run App
   docker_container:
