@@ -22,7 +22,5 @@ jobs:
         with:
           # relative path to the place where source code with Dockerfile is located
           context: ./TP2/TP1_ToPipeLine/front
-          tags: 
-            - ${{ secrets.DOCKERHUB_USERNAME }}/devops_front:${{ env.RELEASE_VERSION }}
-            - ${{ secrets.DOCKERHUB_USERNAME }}/devops_front:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops_front:${{ env.RELEASE_VERSION }}, ${{ secrets.DOCKERHUB_USERNAME }}/devops_front:latest
           push: ${{ github.ref == 'refs/heads/main' }}
